@@ -20,55 +20,43 @@ log_d = logging.getLogger("TAD")
 logging.basicConfig(level=logging.DEBUG)
 # logging.basicConfig(level=logging.INFO)
 
-class Game:
-    def __init__(self):
-        self.frame_counter = 0
-        self.skittle = 10
-        self.score_counter = ''
+def do_throw_ball(skittle_counter = 10):
+    ball_1 = random.randint(0, skittle_counter)
+    ball_2 = random.randint(0, skittle_counter - ball_1)
+    return ball_1, ball_2
 
-    def do_throw_ball(self):
-        return (random.randint(0, self.skittle))
 
-    def frame(self):
-        self.frame_counter += 1
-        self.skittle = 10
-        ball_1 = self.do_throw_ball()
-        if ball_1 == 10:
-            log_d.info(f'{self.frame_counter}.1 - ***STRIKE!!!***')
-            self.score_counter += 'X'
-            return
+def frame(frame_counter, ball_1, ball_2):
+    if ball_1 == 10:
+        log_d.info(f'{frame_counter}.1 - ***STRIKE!!!***')
+        return 'X'
+    else:
+        if ball_1 == 0:
+            log_d.debug(f'{frame_counter}.1 - You missed the ball 1!')
         else:
-            if ball_1 == 0:
-                log_d.debug(f'{self.frame_counter}.1 - You missed the ball 1!')
-            else:
-                log_d.debug(f'{self.frame_counter}.1 - {ball_1}')
-                self.skittle -= ball_1
-            ball_2 = self.do_throw_ball()
-            self.skittle -= ball_2
-            if ball_2 == 0:
-                log_d.debug(f'{self.frame_counter}.2 - You missed the ball 2!')
-            else:
-                log_d.debug(f'{self.frame_counter}.2 - {ball_2}')
-            if self.skittle == 0:
-                log_d.info(f'{self.frame_counter}.2 - SPARE!')
-                self.score_counter += str(ball_1) + '/'
-                return
-            else:
-                self.score_counter += str(ball_1) + str(ball_2)
-                return
+            log_d.debug(f'{frame_counter}.1 - {ball_1}')
+        if ball_2 == 0:
+            log_d.debug(f'{frame_counter}.2 - You missed the ball 2!')
+        else:
+            log_d.debug(f'{frame_counter}.2 - {ball_2}')
+        if ball_1 + ball_2 == 10:
+            log_d.info(f'{frame_counter}.2 - SPARE!')
+            return str(ball_1) + '/'
+        else:
+            return str(ball_1) + str(ball_2)
 
-    def full_game(self):
-        for counter in range(10):
-            self.frame()
+def full_game():
+    score_counter = ''
+    for counter in range(10):
+        ball_1, ball_2 = do_throw_ball()
+        score_counter += frame(counter + 1, ball_1, ball_2)
+    return score_counter
 
-    def get_score(self, game_result):
-        pass
-
+def get_score(self, game_result):
+    pass
 
 if __name__ == '__main__':
-    my_game = Game()
-    my_game.full_game()
-    print(my_game.score_counter)
+    print(full_game())
 
 # Всего 10 кеглей. Игра состоит из 10 фреймов. В одном фрейме до 2х бросков, цель - сбить все кегли.
 # Результаты фрейма записываются символами:

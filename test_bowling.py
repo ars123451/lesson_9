@@ -9,4 +9,4 @@ class My_Test(unittest.TestCase):
         do_throw_ball = Mock(return_value=10)
 
         first = bowling.Game()
-        assertEq
+        self.assertEqual()
