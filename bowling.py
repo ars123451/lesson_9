@@ -52,6 +52,7 @@ def full_game():
         score_counter += frame(counter + 1, ball_1, ball_2)
     return score_counter
 
+
 def get_score(self, game_result):
     pass
 
