@@ -18,9 +18,11 @@ log_d = logging.getLogger("TAD")
 # log_d.addHandler(fh_d)
 
 logging.basicConfig(level=logging.DEBUG)
+
+
 # logging.basicConfig(level=logging.INFO)
 
-def do_throw_ball(skittle_counter = 10):
+def do_throw_ball(skittle_counter=10):
     ball_1 = random.randint(0, skittle_counter)
     ball_2 = random.randint(0, skittle_counter - ball_1)
     return ball_1, ball_2
@@ -45,6 +47,7 @@ def frame(frame_counter, ball_1, ball_2):
         else:
             return str(ball_1) + str(ball_2)
 
+
 def full_game():
     score_counter = ''
     for counter in range(10):
@@ -55,6 +58,7 @@ def full_game():
 
 def get_score(self, game_result):
     pass
+
 
 if __name__ == '__main__':
     print(full_game())
