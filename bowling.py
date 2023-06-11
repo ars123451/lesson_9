@@ -17,7 +17,7 @@ log_d = logging.getLogger("TAD")
 # fh_d.setFormatter(formatter_d)
 # log_d.addHandler(fh_d)
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 
 # logging.basicConfig(level=logging.INFO)
@@ -49,19 +49,29 @@ def frame(frame_counter, ball_1, ball_2):
 
 
 def full_game():
-    score_counter = ''
+    score_counter = []
     for counter in range(10):
         ball_1, ball_2 = do_throw_ball()
-        score_counter += frame(counter + 1, ball_1, ball_2)
+        score_counter.append(frame(counter + 1, ball_1, ball_2))
     return score_counter
 
 
-def get_score(self, game_result):
-    pass
+def visual_score(score):
+    number_score = []
+    for counter in range(10):
+        if score[counter] == 'X':
+            number_score.append(10)
+        elif '/' in score[counter]:
+            number_score.append(10)
+        else:
+            number_score.append(int(score[counter][0]) + int(score[counter][1]))
+    return number_score
 
 
 if __name__ == '__main__':
-    print(full_game())
+    c = full_game()
+    print(c)
+    print(visual_score(c))
 
 # Всего 10 кеглей. Игра состоит из 10 фреймов. В одном фрейме до 2х бросков, цель - сбить все кегли.
 # Результаты фрейма записываются символами:

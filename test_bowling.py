@@ -1,12 +1,20 @@
 import unittest
-from unittest.mock import Mock
+import random
 import bowling
 
 
 class My_Test(unittest.TestCase):
 
     def test_strike(self):
-        do_throw_ball = Mock(return_value=10)
+        ball_2 = random.randint(0, 10)
+        self.assertEqual(bowling.frame(1, 10, ball_2), "X")
 
-        first = bowling.Game()
-        self.assertEqual()
+    def test_spare(self):
+        self.assertEqual(bowling.frame(2, 4, 6), '4/')
+
+    def test_00(self):
+        self.assertEqual(bowling.frame(3, 0, 0), '00')
+
+
+if __name__ == '__main__':
+    unittest.main()
